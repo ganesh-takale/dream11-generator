@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TeamService from "../services/team.service";
 import PlayerService from "../services/player.service";
-import { Link } from "react-router-dom";
 
 export default class TeamsList extends Component {
     constructor(props) {
@@ -72,11 +71,12 @@ export default class TeamsList extends Component {
     }
 
     setActiveTeam(team, index) {
-        this.retrievePlayers(team.id);
-        this.setState({
-            currentTeam: team,
-            currentIndex: index
-        });
+        this.props.history.push("/players/"+team.id);
+        // this.retrievePlayers(team.id);
+        // this.setState({
+        //     currentTeam: team,
+        //     currentIndex: index
+        // });
     }
 
     setActivePlayer(player, index) {
@@ -97,79 +97,29 @@ export default class TeamsList extends Component {
             .catch(e => {
                 console.log(e);
             });
-    }
+    };
+
 
     render() {
-        const { searchTitle, teams, players, currentTeam, currentIndex, currentPlayerIndex } = this.state;
+        const { teams, currentTeam, currentIndex, } = this.state;
         return (
-            <div className="list row">
-                <div className="col-md-8">
-                    <div className="input-group mb-3">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Search by title"
-                            value={searchTitle}
-                            onChange={this.onChangeSearchTitle}
-                        />
-                        <div className="input-group-append">
-                            <button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={this.searchTitle}
-                            >
-                                Search
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <h4>Teams List</h4>
-
+                <div>
+                    <h3>Teams List</h3>
                     <ul className="list-group">
                         {teams &&
                         teams.map((team, index) => (
-                            <li
+                            <li key={index}
                                 className={
                                     "list-group-item " +
                                     (index === currentIndex ? "active" : "")
                                 }
                                 onClick={() => this.setActiveTeam(team, index)}
-                                key={index}
                             >
                                 {team.name}
                             </li>
                         ))}
                     </ul>
                 </div>
-                <div className="col-md-6">
-                    {currentTeam ? (
-                        <div>
-                            <h4>{currentTeam.name}</h4>
-                            <ul className="list-group">
-                                {players &&
-                                players.map((player, index) => (
-                                    <li
-                                        className={
-                                            "list-group-item " +
-                                            (index === currentPlayerIndex ? "active" : "")
-                                        }
-                                        onClick={() => this.setActivePlayer(player, index)}
-                                        key={index}
-                                    >
-                                        {player.name} ({player.credits})
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ) : (
-                        <div>
-                            <br />
-                            <p>Please click on a Team...</p>
-                        </div>
-                    )}
-                </div>
-            </div>
         );
     }
 }

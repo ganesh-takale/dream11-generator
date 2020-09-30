@@ -1,12 +1,12 @@
 import http from "../http-common";
 
 class PlayerService {
-    getAll() {
-        return http.get("/players");
+    getAll(id) {
+        return http.get(`/players/${id}`);
     }
 
     get(id) {
-        return http.get(`/players/${id}`);
+        return http.get(`/player/${id}`);
     }
 
     create(data) {
@@ -14,7 +14,7 @@ class PlayerService {
     }
 
     update(id, data) {
-        return http.put(`/players/${id}`, data);
+        return http.post(`/player/${id}`, data);
     }
 
     delete(id) {
