@@ -1,5 +1,6 @@
 package com.ganeshtakale.ipldemo.controller;
 
+import com.ganeshtakale.ipldemo.bean.MatchBean;
 import com.ganeshtakale.ipldemo.model.Matches;
 import com.ganeshtakale.ipldemo.model.Teams;
 import com.ganeshtakale.ipldemo.repository.MatchesRepository;
@@ -21,6 +22,11 @@ public class MatchesController {
 	@GetMapping("/matches")
 	public Iterable<Matches> getAll() {
 		return ms.getAll();
+	}
+
+	@GetMapping("/matches/upcoming")
+	public List<MatchBean> getUpcomingMatches() {
+		return ms.getUpcomingMatches();
 	}
 
 }

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +31,7 @@ public class Matches implements Serializable {
 	private long id;
 
 	@Column(name = "date_time")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateTime;
 
 	@ManyToOne(cascade = CascadeType.ALL)
