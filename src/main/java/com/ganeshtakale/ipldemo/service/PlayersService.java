@@ -2,11 +2,13 @@ package com.ganeshtakale.ipldemo.service;
 
 import com.ganeshtakale.ipldemo.model.Players;
 import com.ganeshtakale.ipldemo.repository.PlayersRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PlayersService {
@@ -41,5 +43,28 @@ public class PlayersService {
 			}
 		}
 		return players1;
+	}
+
+	public Players getById(long id) {
+		Optional<Players> player = playersRepository.findById(id);
+		return player.orElse(null);
+	}
+
+	public JSONObject updatePlayer(long id, Players players) {
+		JSONObject response = new JSONObject();
+		Optional<Players> player = playersRepository.findById(id);
+		if (player.isPresent()) {
+			Players players1 = player.get();
+			players1.setType(players.getType());
+			players1.setCredits(players.getCredits());
+			players1.setInPlaying11(players.isInPlaying11());
+			playersRepository.save(players1);
+			response.put("status_cd","1");
+			response.put("message","Details of "+players1.getName() +" updated successfully");
+		} else {
+			response.put("status_cd","0");
+			response.put("message","Player does not exist for ID:"+id);
+		}
+		return response;
 	}
 }
