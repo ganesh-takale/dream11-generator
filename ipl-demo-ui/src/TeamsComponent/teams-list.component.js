@@ -138,7 +138,7 @@ export default class TeamsList extends Component {
     render() {
         const { teams, currentTeam, currentIndex, } = this.state;
         return (
-                <div>
+                <div style={{marginLeft: 20, marginRight: 20}}>
                     <h3>Teams List</h3>
                     {/* <ul className="list-group">
                         {teams &&
@@ -160,7 +160,7 @@ export default class TeamsList extends Component {
                         {teams &&
                             teams.map((team, index) => {
                                 return(
-                                    <div className={styles.cardBox}>
+                                    <div className={styles.cardBox} key={index}>
                                     <Card className={styles.root} key={index} onClick={() => this.setActiveTeam(team, index)}>
                                         <CardActionArea>
                                             <div className={styles.imageContainer}>
