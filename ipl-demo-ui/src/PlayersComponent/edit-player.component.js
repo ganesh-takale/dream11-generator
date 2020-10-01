@@ -12,7 +12,7 @@ class EditPlayer extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             player:{},
-            credits:null,
+            credits:'',
             type:null,
             isPlaying:false
         }
@@ -36,7 +36,8 @@ class EditPlayer extends Component {
     }
 
     onChangePlayerCredits(e) {
-        this.props.onChange(e.target.value);
+        console.log('iam value',e.target.value)
+        // this.props.onChange(e.target.value);
         this.setState({
             credits:e.target.value
         });
@@ -107,9 +108,11 @@ class EditPlayer extends Component {
                         <label>Credits: </label>
                         <input
                             type="text"
+                            defaultValue={player.credits}
                             className="form-control"
-                            value={player.credits}
-                            onchange={this.onChangePlayerCredits}
+                            // value={this.state.credits}
+                            // onChange={this.onChangePlayerCredits}
+                            onChange={(e) => {this.onChangePlayerCredits(e)}}
                         />
                     </div>
                     <div className="form-group">

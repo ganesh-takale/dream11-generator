@@ -13,14 +13,14 @@ import styles from './Teams.module.css'; // Import css modules stylesheet as sty
 
 
 const imagesList =[
-    require('../images/mumbai.jpg'),
+    require('../images/mumbai1.jpg'),
     require('../images/chennai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/chennai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/mumbai.jpg'),
+    require('../images/rajasthan.jpg'),
+    require('../images/delhi.png'),
+    require('../images/bangalore.jpg'),
+    require('../images/sunrisers1.jpg'),
+    require('../images/kolkata.jpg'),
+    require('../images/punjab1.jpg'),
 ]
 
 export default class TeamsList extends Component {

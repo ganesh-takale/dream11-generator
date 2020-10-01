@@ -3,15 +3,17 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import logo from './logo.svg';
 import "bootstrap/dist/css/bootstrap.min.css";
 import TeamsList from './TeamsComponent/teams-list.component'
-import './App.css';
+import styles from './Apps.module.css'; // Import css modules stylesheet as styles
+
 import PlayersList from "./PlayersComponent/players-list.component";
 import EditPlayer from "./PlayersComponent/edit-player.component";
+import Navbar from './components/Navbar';
 
 class App extends Component {
     render() {
         return (
             <Router>
-            <div className="container" >
+            <div className={styles.container} >
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <a href="#" className="navbar-brand">
                         <img src={logo} width="30" height="30" alt="Logo" />
@@ -28,6 +30,7 @@ class App extends Component {
                         </ul>
                     </div>
                 </nav>
+                {/* <Navbar /> */}
                 <Route exact path={["/", "/teamsList"]} component={TeamsList} />
                 {/*<Route exact path="/add" component={AddTutorial} />*/}
                 <Route path="/players/:id" component={PlayersList} />
