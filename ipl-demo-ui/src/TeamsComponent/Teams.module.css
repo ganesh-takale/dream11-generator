@@ -1,0 +1,35 @@
+.root {
+    flex-direction: row;
+    display: inline;
+  }
+.media {
+    width: 15rem !important;
+    background-color: "blue";
+    border-width: 51px;
+    /* padding-right: 2rem; */
+    min-height: 11rem;
+    align-items: center;
+    justify-content: center;
+}
+.cardContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+.imageContainer{
+  justify-content: center;
+  align-content: center;
+  width: 15rem;
+  
+}
+.cardBox{
+  padding: 1rem;
+  width: 17rem !important;
+  display: flex;
+}
+.cardContent {
+  /* height: '100%'; */
+  /* background-color: aqua; */
+  justify-content: flex-end;
+  min-height: 7rem;
+}
