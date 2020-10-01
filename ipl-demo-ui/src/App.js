@@ -15,7 +15,11 @@ class App extends Component {
         return (
             <Router>
             <div className={styles.container} >
+<<<<<<< HEAD
                 {/* <nav className="navbar navbar-expand navbar-dark bg-dark">
+=======
+                <nav className="navbar navbar-expand navbar-dark bg-dark">
+>>>>>>> b72ec6dac4fc2026c2dd39c655ae4e954a22e4ba
                     <a href="#" className="navbar-brand">
                         <img src={logo} width="30" height="30" alt="Logo" />
                     </a>
@@ -30,6 +34,7 @@ class App extends Component {
                             </li>
                         </ul>
                     </div>
+<<<<<<< HEAD
                 </nav> */}
                 <CssBaseline />
                 <Navbar />
@@ -39,6 +44,14 @@ class App extends Component {
                     <Route path="/players/:id" component={PlayersList} />
                     <Route path="/player/:id" component={EditPlayer} />
                 </div>
+=======
+                </nav>
+                {/* <Navbar /> */}
+                <Route exact path={["/", "/teamsList"]} component={TeamsList} />
+                {/*<Route exact path="/add" component={AddTutorial} />*/}
+                <Route path="/players/:id" component={PlayersList} />
+                <Route path="/player/:id" component={EditPlayer} />
+>>>>>>> b72ec6dac4fc2026c2dd39c655ae4e954a22e4ba
             </div>
             </Router>
         );
