@@ -105,7 +105,7 @@ export default class Team extends Component {
         const { currentTeam } = this.state;
 
         return (
-            <div>
+            <div style={{marginLeft: 20, marginRight: 20}}>
                 {currentTeam ? (
                     <div className="edit-form">
                         <h4>Team</h4>

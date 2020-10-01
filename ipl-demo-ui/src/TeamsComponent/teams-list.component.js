@@ -13,14 +13,14 @@ import styles from './Teams.module.css'; // Import css modules stylesheet as sty
 
 
 const imagesList =[
-    require('../images/mumbai.jpg'),
+    require('../images/mumbai1.jpg'),
     require('../images/chennai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/chennai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/mumbai.jpg'),
-    require('../images/mumbai.jpg'),
+    require('../images/rajasthan.jpg'),
+    require('../images/delhi.png'),
+    require('../images/bangalore.jpg'),
+    require('../images/sunrisers1.jpg'),
+    require('../images/kolkata.jpg'),
+    require('../images/punjab1.jpg'),
 ]
 
 export default class TeamsList extends Component {
@@ -138,7 +138,7 @@ export default class TeamsList extends Component {
     render() {
         const { teams, currentTeam, currentIndex, } = this.state;
         return (
-                <div>
+                <div style={{marginLeft: 20, marginRight: 20}}>
                     <h3>Teams List</h3>
                     {/* <ul className="list-group">
                         {teams &&
@@ -160,7 +160,7 @@ export default class TeamsList extends Component {
                         {teams &&
                             teams.map((team, index) => {
                                 return(
-                                    <div className={styles.cardBox}>
+                                    <div className={styles.cardBox} key={index}>
                                     <Card className={styles.root} key={index} onClick={() => this.setActiveTeam(team, index)}>
                                         <CardActionArea>
                                             <div className={styles.imageContainer}>
