@@ -1,6 +1,27 @@
 import React, { Component } from "react";
+import Card from '@material-ui/core/Card';
+import { Image } from 'react-bootstrap';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import TeamService from "../services/team.service";
 import PlayerService from "../services/player.service";
+import styles from './Teams.module.css'; // Import css modules stylesheet as styles
+
+
+const imagesList =[
+    require('../images/mumbai.jpg'),
+    require('../images/chennai.jpg'),
+    require('../images/mumbai.jpg'),
+    require('../images/chennai.jpg'),
+    require('../images/mumbai.jpg'),
+    require('../images/mumbai.jpg'),
+    require('../images/mumbai.jpg'),
+    require('../images/mumbai.jpg'),
+]
 
 export default class TeamsList extends Component {
     constructor(props) {
@@ -16,6 +37,7 @@ export default class TeamsList extends Component {
         this.state = {
             teams: [],
             players:[],
+            TEAMS_SET: [],
             currentTeam: null,
             currentPlayer: null,
             currentIndex: -1,
@@ -40,9 +62,22 @@ export default class TeamsList extends Component {
         TeamService.getAll()
             .then(response => {
                 this.setState({
-                    teams: response.data
+                    TEAMS_SET: response.data
                 });
-                console.log(response.data);
+                let sampleTopics = [];
+                this.state.TEAMS_SET.forEach(function (entry, index) {
+                      sampleTopics.push({
+                        code: entry.code,
+                        id: entry.id,
+                        name: entry.name,
+                        image: imagesList[index]
+                      });
+                  });
+                this.setState({
+                    teams: sampleTopics
+                });
+                console.log('this is teams array++++',this.state.teams[0].image);
+                // console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -105,9 +140,10 @@ export default class TeamsList extends Component {
         return (
                 <div>
                     <h3>Teams List</h3>
-                    <ul className="list-group">
+                    {/* <ul className="list-group">
                         {teams &&
                         teams.map((team, index) => (
+                            <div>
                             <li key={index}
                                 className={
                                     "list-group-item " +
@@ -117,9 +153,35 @@ export default class TeamsList extends Component {
                             >
                                 {team.name}
                             </li>
+                            </div>
                         ))}
-                    </ul>
+                    </ul> */}
+                    <div className={styles.cardContainer}>
+                        {teams &&
+                            teams.map((team, index) => {
+                                return(
+                                    <div className={styles.cardBox}>
+                                    <Card className={styles.root} key={index} onClick={() => this.setActiveTeam(team, index)}>
+                                        <CardActionArea>
+                                            <div className={styles.imageContainer}>
+                                                <Image src={team.image} className={styles.media} alt="img" />
+                                            </div>
+                                            <CardContent className={styles.cardContent}>
+                                                <Typography variant="h5" component="h2">
+                                                    {team.name}
+                                                </Typography>
+                                            </CardContent>
+                                        </CardActionArea>
+                                    </Card>
+                                </div>
+                                )
+                           
+                            })
+                        }
+                    </div>
+
                 </div>
+
         );
     }
 }

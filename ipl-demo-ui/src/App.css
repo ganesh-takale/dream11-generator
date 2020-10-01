@@ -52,3 +52,12 @@
   max-width: 300px;
   margin: auto;
 }
+
+.root {
+  max-width: 345;
+}
+.media {
+  max-height: 140;
+  max-width: 345;
+  background-color: "blue";
+}
