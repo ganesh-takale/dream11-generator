@@ -29,4 +29,10 @@ public class TeamsController {
 		return ts.generateTeams(team1,team2,strId);
 	}
 
+	@GetMapping("/generate-report")
+	public String generateReport(@RequestParam(value = "team1") long team1,
+			@RequestParam(value = "team2") long team2,@RequestParam(value = "strategyId") long strId) {
+		return ts.generateReport(team1,team2,strId);
+	}
+
 }
