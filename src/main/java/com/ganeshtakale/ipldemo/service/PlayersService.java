@@ -1,5 +1,6 @@
 package com.ganeshtakale.ipldemo.service;
 
+import com.ganeshtakale.ipldemo.bean.PlayerBean;
 import com.ganeshtakale.ipldemo.model.Players;
 import com.ganeshtakale.ipldemo.repository.PlayersRepository;
 import org.json.JSONObject;
@@ -66,5 +67,19 @@ public class PlayersService {
 			response.put("message","Player does not exist for ID:"+id);
 		}
 		return response;
+	}
+
+	public List<PlayerBean> getPlaying11(long teamId){
+		Iterable<Players> players = playersRepository.findByTeam_IdAndInPlaying11(teamId, true);
+		List<PlayerBean> playing11 = new ArrayList<>();
+		for(Players p: players){
+			PlayerBean bean = new PlayerBean();
+			bean.setName(p.getName());
+			bean.setCredits(Double.parseDouble(p.getCredits()));
+			bean.setRole(p.getType());
+			bean.setTeam(p.getTeam().getCode());
+			playing11.add(bean);
+		}
+		return playing11;
 	}
 }

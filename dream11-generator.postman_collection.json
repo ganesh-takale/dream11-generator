@@ -223,6 +223,143 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GET UPCOMING MATCHES",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/matches/upcoming",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"matches",
+						"upcoming"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ALL TEAM STRATEGY",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/team-strategy",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"team-strategy"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET TEAM STRATEGY",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/team-strategy/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"team-strategy",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GENERATE TEAMS",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/generate-teams/?team1=3&team2=7&strategyId=16",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"generate-teams",
+						""
+					],
+					"query": [
+						{
+							"key": "team1",
+							"value": "3"
+						},
+						{
+							"key": "team2",
+							"value": "7"
+						},
+						{
+							"key": "strategyId",
+							"value": "16"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
