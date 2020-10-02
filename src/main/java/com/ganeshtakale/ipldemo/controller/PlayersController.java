@@ -1,10 +1,8 @@
 package com.ganeshtakale.ipldemo.controller;
 
+import com.ganeshtakale.ipldemo.bean.PlayerBean;
 import com.ganeshtakale.ipldemo.model.Players;
-import com.ganeshtakale.ipldemo.model.Teams;
 import com.ganeshtakale.ipldemo.service.PlayersService;
-import com.ganeshtakale.ipldemo.service.TeamsService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,5 +43,10 @@ public class PlayersController {
 	@PostMapping("/player/{playerId}")
 	public @ResponseBody String getById(@PathVariable long playerId, @RequestBody Players player) {
 		return ps.updatePlayer(playerId,player).toString();
+	}
+
+	@GetMapping("/playing11/{teamId}")
+	public List<PlayerBean> getPlaying11(@PathVariable long teamId) {
+		return ps.getPlaying11(teamId);
 	}
 }
