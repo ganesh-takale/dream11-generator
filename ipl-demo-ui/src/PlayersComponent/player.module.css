@@ -49,3 +49,9 @@
   justify-content: flex-end;
   min-height: 7rem;
 }
+
+/* modal css */
+
+.modalBox{
+  margin-top: 4rem;
+}

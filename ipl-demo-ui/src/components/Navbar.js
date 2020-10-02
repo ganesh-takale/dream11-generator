@@ -18,7 +18,6 @@ import TemporaryDrawer from './TemporaryDrawer';
 import { withRouter } from "react-router-dom";
 
 const Navbar = (props) => {
-    console.log('this is navbar',props)
     return(
         <Box component="nav">
             <AppBar>
@@ -30,9 +29,12 @@ const Navbar = (props) => {
                         </a>
                         :''
                     }
-                    <CardContent >
+                    <CardContent style={{ display: 'flex', flexDirection: 'row'}} >
                         <Typography variant="h5" component="h2">
                             Dream11 generator
+                        </Typography>
+                        <Typography onClick={() => props.history.push('/upcomingMatches')} style={{ marginLeft: 50, cursor: 'pointer'}}variant="h5" component="h2">
+                          Upcoming Matches
                         </Typography>
                     </CardContent>
                 </Toolbar>

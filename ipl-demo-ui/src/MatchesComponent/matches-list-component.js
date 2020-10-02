@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import moment from 'moment';
 import Card from '@material-ui/core/Card';
 import { Image, Toast } from 'react-bootstrap';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,20 +9,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import PlayerService from "../services/player.service";
+import PlayerService from "../services/team.service";
 import { Link } from 'react-router-dom';
-import styles from './player.module.css';
-import EditPlayerModal from "./edit-player-modal";
+import styles from './match.module.css';
+import EditPlayerModal from "../PlayersComponent/edit-player-modal";
 
-export default class PlayersList extends Component {
+export default class MatchesList extends Component {
     constructor(props) {
         super(props);
-        this.refreshList = this.refreshList.bind(this);
-        this.retrievePlayers = this.retrievePlayers.bind(this);
-        this.setActivePlayer = this.setActivePlayer.bind(this);
-
+        // this.refreshList = this.refreshList.bind(this);
+        // this.retrievePlayers = this.retrievePlayers.bind(this);
+        // this.setActivePlayer = this.setActivePlayer.bind(this);
         this.state = {
-            players:[],
+            matches:[],
             currentPlayer: null,
             showModal: false,
             id: null,
@@ -34,16 +34,21 @@ export default class PlayersList extends Component {
         this.retrievePlayers();
     }
 
-    MyLink = (player) =>{
-        this.props.history.push(`${"/player/"+player.id}`);
+    MyLink = (singleMatch) =>{
+        console.log(singleMatch)
+        this.props.history.push({
+            pathname: '/singleMatch',
+            state: { singleMatch: singleMatch }
+          })
+        // this.props.history.push(`${"/player/"+player.id}`);
     }
     retrievePlayers() {
-        PlayerService.getAll(this.props.match.params.id)
+        PlayerService.getUpcomingMatches()
             .then(response => {
-                console.log('Get upc',response.data);
                 this.setState({
-                    players: response.data
+                    matches: response.data
                 });
+                console.log(this.state.matches);
             })
             .catch(e => {
                 console.log(e);
@@ -93,7 +98,7 @@ export default class PlayersList extends Component {
     }
 
     render() {
-        const {players, toastFlag} = this.state;
+        const {matches, toastFlag} = this.state;
         return (
             <div>
                 {
@@ -105,35 +110,45 @@ export default class PlayersList extends Component {
                     </div>: ''
                 }
                 <div className={styles.cardContainer}>
-                    {players &&
-                        players.map((player, index) => {
+                    {matches &&
+                        matches.map((match, index) => {
                             return(
-                            <div className={player.inPlaying11 ? styles.cardBoxActive : styles.cardBox} key={index}>
-                                <Card  raised={player.inPlaying11} className={styles.root} key={index}>
+                            <div className={styles.cardBox} key={index}>
+                                <Card onClick={() => this.MyLink(match)}  className={styles.root} key={index}>
                                 {/* onClick={() => this.MyLink(player)} */}
-                                    <CardActionArea>
-                                        <div className={styles.imageContainer}>
-                                            <Image src={require('../images/user.png')} className={styles.media} alt="img" />
-                                        </div>
+                                    <CardActionArea style={{textAlign: 'center'}}>
                                         <CardContent className={styles.cardContent}>
-                                            <Typography variant="h5" component="h2">
-                                                {player.name}
+                                            <Typography variant="h6" component="h2">
+                                               Venue: {match.location}
                                             </Typography>
+                                            <Typography variant="h6" component="h2">
+                                                {/* {match.dateTime} */}
+                                               Date: {moment(match.dateTime).format('ll')}
+                                            </Typography>
+                                            <div style={{display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: 40}}>
+                                            <Typography variant="h5" component="h2">
+                                                {match.team1.name}
+                                            </Typography>
+                                            <Typography variant="h6" component="h2">
+                                                VS
+                                            </Typography>
+                                            <Typography variant="h5" component="h2">
+                                                {match.team2.name}
+                                            </Typography>
+                                            </div>
+                                          
                                         </CardContent>
                                     </CardActionArea>
-                                    <Button onClick={() => this.Modal(player)}>
-                                        Edit
-                                    </Button>
                                 </Card>
                             </div>
                             )
                         })
                     }
                 </div>
-                {
-                this.state.showModal && <EditPlayerModal onInputChanged={this.onInputChanged} Id={this.state.id} toggle={this.state.showModal} value={true} />
-                }
             </div>
+            // <div>
+            //     <h1>i am ajay</h1>
+            // </div>
         )
     }
 }

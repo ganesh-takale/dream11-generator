@@ -1,0 +1,42 @@
+.root {
+    flex-direction: row;
+    display: inline;
+    width: 100vw;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    /* min-width: 17rem !important;
+    max-width: 17rem !important; */
+  }
+
+.media {
+    align-items: center;
+    justify-content: center;
+}
+.cardContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+.imageContainer{
+  justify-content: center;
+  align-content: center;
+  width: 15rem;
+}
+.cardBox{
+  margin: 1rem;
+  width: 100vw;
+  display: flex;
+  padding: 0.3rem;
+  /* background-color: red; */
+  border-radius: 5px;
+}
+.cardContent {
+  justify-content: flex-end;
+  min-height: 7rem;
+}
+
+/* modal css */
+
+.modalBox{
+  margin-top: 4rem;
+}

@@ -4,6 +4,12 @@ class TeamService {
     getAll() {
         return http.get("/teams");
     }
+    getUpcomingMatches() {
+        return http.get("/matches/upcoming");
+    }
+    getplaying11(id){
+        return http.get(`/playing11/${id}`);
+    }
 
     get(id) {
         return http.get(`/players/${id}`);

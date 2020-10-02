@@ -8,6 +8,8 @@ import styles from './Apps.module.css'; // Import css modules stylesheet as styl
 
 import PlayersList from "./PlayersComponent/players-list.component";
 import EditPlayer from "./PlayersComponent/edit-player.component";
+import MatchesList from './MatchesComponent/matches-list-component';
+import SingleMatchComponent from './MatchesComponent/single-match-component';
 import Navbar from './components/Navbar';
 
 class App extends Component {
@@ -15,29 +17,13 @@ class App extends Component {
         return (
             <Router>
             <div className={styles.container} >
-                {/* <nav className="navbar navbar-expand navbar-dark bg-dark">
-                    <a href="#" className="navbar-brand">
-                        <img src={logo} width="30" height="30" alt="Logo" />
-                    </a>
-                    <Link to="/" className="navbar-brand">Dream11 Team Generator</Link>
-                    <div className="collpase navbar-collapse">
-                        <ul className="navbar-nav mr-auto">
-                            <li className="navbar-item">
-                                <Link to="/" className="nav-link">Teams</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/create" className="nav-link">Matches</Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav> */}
                 <CssBaseline />
                 <Navbar />
                 <div className={styles.pageContainer}>
                     <Route exact path={["/", "/teamsList"]} component={TeamsList} />
-                    {/*<Route exact path="/add" component={AddTutorial} />*/}
                     <Route path="/teams/:id" component={PlayersList} />
-                    <Route path="/player/:id" component={EditPlayer} />
+                    <Route path="/upcomingMatches" component={MatchesList} />
+                    <Route path="/singleMatch" component={SingleMatchComponent} />
                 </div>
             </div>
             </Router>
