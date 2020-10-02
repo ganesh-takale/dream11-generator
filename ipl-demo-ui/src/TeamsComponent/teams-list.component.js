@@ -47,6 +47,7 @@ export default class TeamsList extends Component {
     }
 
     componentDidMount() {
+        console.log('this is hostiry', this.props)
         this.retrieveTeams();
     }
 
@@ -106,7 +107,7 @@ export default class TeamsList extends Component {
     }
 
     setActiveTeam(team, index) {
-        this.props.history.push("/players/"+team.id);
+        this.props.history.push("/teams/"+team.id);
         // this.retrievePlayers(team.id);
         // this.setState({
         //     currentTeam: team,

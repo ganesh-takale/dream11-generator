@@ -12,18 +12,33 @@ import {
     Typography,
     Box
 } from '@material-ui/core';
-import { ArrowBack, AssignmentInd,Home, Apps, ContactMail } from '@material-ui/icons'
+import CardContent from '@material-ui/core/CardContent';
+import { ArrowBack, AssignmentInd,Home, Apps, ContactMail } from '@material-ui/icons';
+import TemporaryDrawer from './TemporaryDrawer';
+import { withRouter } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+    console.log('this is navbar',props)
     return(
         <Box component="nav">
             <AppBar>
                 <Toolbar>
-                    <ArrowBack />
+                    {
+                        props.history.location.pathname !== '/' ?
+                        <a onClick={() => props.history.goBack()}>
+                            <ArrowBack />
+                        </a>
+                        :''
+                    }
+                    <CardContent >
+                        <Typography variant="h5" component="h2">
+                            Dream11 generator
+                        </Typography>
+                    </CardContent>
                 </Toolbar>
             </AppBar>
         </Box>
     )
 }
 
-export default Navbar;
+export default withRouter(Navbar);

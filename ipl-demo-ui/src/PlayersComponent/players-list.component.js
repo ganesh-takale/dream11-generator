@@ -1,21 +1,16 @@
 import React, { Component } from "react";
+import Card from '@material-ui/core/Card';
+import { Image } from 'react-bootstrap';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { makeStyles } from '@material-ui/core/styles';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import PlayerService from "../services/player.service";
 import { Link } from 'react-router-dom';
-const Player = (props) => (
-    <tr>
-        <td>{props.player.name}</td>
-        <td>{props.player.type}</td>
-        <td>{props.player.credits}</td>
-        <td>{props.player.inPlaying11 ? "YES" : "NO"}</td>
-        <td>
-            <Link style={{marginRight : 5}} to={"/player/"+props.player.id}>Edit</Link>
-        </td>
-    </tr>
-)
-
-const Players = ({ onHandleClick, tasksState}) => tasksState.map(function(currentTask, i){
-    return <Player onClick={onHandleClick} player={currentTask} key={i} />;
-});
+import styles from './player.module.css';
 
 export default class PlayersList extends Component {
     constructor(props) {
@@ -34,6 +29,10 @@ export default class PlayersList extends Component {
         this.retrievePlayers();
     }
 
+    MyLink = (player) =>{
+        this.props.history.push(`${"/player/"+player.id}`);
+        // return(<Link to={"/player/"+player.id} />)
+    }
     retrievePlayers() {
         PlayerService.getAll(this.props.match.params.id)
             .then(response => {
@@ -66,22 +65,29 @@ export default class PlayersList extends Component {
         const {players} = this.state;
         return (
             <div>
-            <h3></h3>
-            <table className="table table-striped" style={{ marginTop: 20 }} >
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                    <th>Credits</th>
-                    <th>In Playing11</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <Players tasksState={players || []} />
-                </tbody>
-            </table>
-        </div>
+                <div className={styles.cardContainer}>
+                    {players &&
+                        players.map((player, index) => {
+                            return(
+                            <div className={player.inPlaying11 ? styles.cardBoxActive : styles.cardBox} key={index}>
+                                <Card onClick={() => this.MyLink(player)} raised={player.inPlaying11} className={styles.root} key={index}>
+                                    <CardActionArea>
+                                        <div className={styles.imageContainer}>
+                                            <Image src={require('../images/user.png')} className={styles.media} alt="img" />
+                                        </div>
+                                        <CardContent className={styles.cardContent}>
+                                            <Typography variant="h5" component="h2">
+                                                {player.name}
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
         )
     }
 }
